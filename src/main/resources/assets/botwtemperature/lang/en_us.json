@@ -88,6 +88,11 @@
 
 	"itemGroup.botwtemperature": "Temperature",
 
+	"item.botwtemperature.desert_voe_cap": "Desert Voe Cap",
+	"item.botwtemperature.desert_voe_tunic": "Desert Voe Tunic",
+	"item.botwtemperature.desert_voe_leggings": "Desert Voe Leggings",
+	"item.botwtemperature.desert_voe_boots": "Desert Voe Boots",
+
 	"item.botwtemperature.snowquil_cap": "Snowquil Cap",
 	"item.botwtemperature.snowquil_tunic": "Snowquil Tunic",
 	"item.botwtemperature.snowquil_leggings": "Snowquil Leggings",
