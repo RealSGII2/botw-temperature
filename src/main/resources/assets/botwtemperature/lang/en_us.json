@@ -1,0 +1,95 @@
+{
+	"death.attack.cold": "%1$s froze to death",
+	"death.attack.cold.player": "%1$s froze to death while fighting %2$1",
+
+	"death.attack.heat": "%1$s died of heatstroke",
+	"death.attack.heat.player": "%1$s died of heatstroke while fighting %2$s",
+
+	"effect.botwtemperature.cold_resistance": "Cold Resistance",
+	"description.effect.botwtemperature.cold_resistance": "Grants immunity to cold temperatures",
+
+	"effect.botwtemperature.heat_resistance": "Heat Resistance",
+	"description.effect.botwtemperature.heat_resistance": "Grants immunity to hot temperatures",
+
+	"effect.botwtemperature.icebreaker": "Icebreaking",
+	"description.effect.botwtemperature.icebreaker": "Prevents freezing in very cold water",
+
+	"item.minecraft.potion.effect.cold_resistance": "Potion of Cold Resistance",
+	"item.minecraft.splash_potion.effect.cold_resistance": "Splash Potion of Cold Resistance",
+	"item.minecraft.lingering_potion.effect.cold_resistance": "Lingering Potion of Cold Resistance",
+	"item.minecraft.tipped_arrow.effect.cold_resistance": "Cold Resistance Tipped Arrow",
+
+	"item.minecraft.potion.effect.cold_resistance_long": "Potion of Cold Resistance",
+	"item.minecraft.splash_potion.effect.cold_resistance_long": "Splash Potion of Cold Resistance",
+	"item.minecraft.lingering_potion.effect.cold_resistance_long": "Lingering Potion of Cold Resistance",
+	"item.minecraft.tipped_arrow.effect.cold_resistance_long": "Cold Resistance Tipped Arrow",
+
+	"item.minecraft.potion.effect.cold_resistance_ii": "Potion of Cold Resistance II",
+	"item.minecraft.splash_potion.effect.cold_resistance_ii": "Splash Potion of Cold Resistance II",
+	"item.minecraft.lingering_potion.effect.cold_resistance_ii": "Lingering Potion of Cold Resistance II",
+	"item.minecraft.tipped_arrow.effect.cold_resistance_ii": "Cold Resistance Tipped Arrow II",
+
+	"item.minecraft.potion.effect.cold_resistance_ii_long": "Potion of Cold Resistance II",
+	"item.minecraft.splash_potion.effect.cold_resistance_ii_long": "Splash Potion of Cold Resistance II",
+	"item.minecraft.lingering_potion.effect.cold_resistance_ii_long": "Lingering Potion of Cold Resistance II",
+	"item.minecraft.tipped_arrow.effect.cold_resistance_ii_long": "Cold Resistance Tipped Arrow II",
+
+	"item.minecraft.potion.effect.heat_resistance": "Potion of Heat Resistance",
+	"item.minecraft.splash_potion.effect.heat_resistance": "Splash Potion of Heat Resistance",
+	"item.minecraft.lingering_potion.effect.heat_resistance": "Lingering Potion of Heat Resistance",
+	"item.minecraft.tipped_arrow.effect.heat_resistance": "Heat Resistance Tipped Arrow",
+
+	"item.minecraft.potion.effect.heat_resistance_long": "Potion of Heat Resistance",
+	"item.minecraft.splash_potion.effect.heat_resistance_long": "Splash Potion of Heat Resistance",
+	"item.minecraft.lingering_potion.effect.heat_resistance_long": "Lingering Potion of Heat Resistance",
+	"item.minecraft.tipped_arrow.effect.heat_resistance_long": "Heat Resistance Tipped Arrow",
+
+	"item.minecraft.potion.effect.heat_resistance_ii": "Potion of Heat Resistance II",
+	"item.minecraft.splash_potion.effect.heat_resistance_ii": "Splash Potion of Heat Resistance II",
+	"item.minecraft.lingering_potion.effect.heat_resistance_ii": "Lingering Potion of Heat Resistance II",
+	"item.minecraft.tipped_arrow.effect.heat_resistance_ii": "Heat Resistance Tipped Arrow II",
+
+	"item.minecraft.potion.effect.heat_resistance_ii_long": "Potion of Heat Resistance II",
+	"item.minecraft.splash_potion.effect.heat_resistance_ii_long": "Splash Potion of Heat Resistance II",
+	"item.minecraft.lingering_potion.effect.heat_resistance_ii_long": "Lingering Potion of Heat Resistance II",
+	"item.minecraft.tipped_arrow.effect.heat_resistance_ii_long": "Heat Resistance Tipped Arrow II",
+
+	"item.minecraft.potion.effect.icebreaker": "Potion of Icebreaking",
+	"item.minecraft.splash_potion.effect.icebreaker": "Splash Potion of Icebreaking",
+	"item.minecraft.lingering_potion.effect.icebreaker": "Lingering Potion of Icebreaking",
+	"item.minecraft.tipped_arrow.effect.icebreaker": "Icebreaking Tipped Arrow",
+
+	"item.minecraft.potion.effect.icebreaker_long": "Potion of Icebreaking",
+	"item.minecraft.splash_potion.effect.icebreaker_long": "Splash Potion of Icebreaking",
+	"item.minecraft.lingering_potion.effect.icebreaker_long": "Lingering Potion of Icebreaking",
+	"item.minecraft.tipped_arrow.effect.icebreaker_long": "Icebreaking Tipped Arrow",
+
+	"item.minecraft.potion.effect.icebreaker_ii": "Potion of Icebreaking II",
+	"item.minecraft.splash_potion.effect.icebreaker_ii": "Splash Potion of Icebreaking II",
+	"item.minecraft.lingering_potion.effect.icebreaker_ii": "Lingering Potion of Icebreaking II",
+	"item.minecraft.tipped_arrow.effect.icebreaker_ii": "Icebreaking Tipped Arrow II",
+
+	"item.minecraft.potion.effect.icebreaker_ii_long": "Potion of Icebreaking II",
+	"item.minecraft.splash_potion.effect.icebreaker_ii_long": "Splash Potion of Icebreaking II",
+	"item.minecraft.lingering_potion.effect.icebreaker_ii_long": "Lingering Potion of Icebreaking II",
+	"item.minecraft.tipped_arrow.effect.icebreaker_ii_long": "Icebreaking Tipped Arrow II",
+
+	"enchantment.botwtemperature.coldproof": "Coldproof",
+	"enchantment.botwtemperature.coldproof.desc": "Increases cold immunity by 1 point (2 max).",
+
+	"enchantment.botwtemperature.heatproof": "Heatproof",
+	"enchantment.botwtemperature.heatproof.desc": "Increases heat immunity by 1 point (2 max).",
+
+	"enchantment.botwtemperature.flamebreaker": "Flamebreaker",
+	"enchantment.botwtemperature.flamebreaker.desc": "Immunity to being set on fire due to hot temperatures.",
+
+	"enchantment.botwtemperature.icebreaker": "Icebreaker",
+	"enchantment.botwtemperature.icebreaker.desc": "Immunity to freezing in very cold water.",
+
+	"itemGroup.botwtemperature": "Temperature",
+
+	"item.botwtemperature.snowquil_cap": "Snowquil Cap",
+	"item.botwtemperature.snowquil_tunic": "Snowquil Tunic",
+	"item.botwtemperature.snowquil_leggings": "Snowquil Leggings",
+	"item.botwtemperature.snowquil_boots": "Snowquil Boots"
+}

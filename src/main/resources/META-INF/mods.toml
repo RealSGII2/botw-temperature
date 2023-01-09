@@ -1,0 +1,10 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="All rights reserved"
+
+[[mods]]
+modId="botwtemperature"
+version="${file.jarVersion}"
+displayName="BotW Temperature"
+authors="RealSGII2"
+description="Custom mod for my modpack."
