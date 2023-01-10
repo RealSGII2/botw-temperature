@@ -1,20 +1,24 @@
 package dev.realsgii2.botwtemperature.registry;
 
-import static dev.realsgii2.botwtemperature.TemperatureMod.MODID;
+// import static dev.realsgii2.botwtemperature.TemperatureMod.MODID;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.Enchantment.Rarity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 
 public class EnchantmentRegisterer {
+    public static final EnchantmentType WEARABLE = EnchantmentType.create("botwtemperature:wearable",
+            item -> (item instanceof ArmorItem));
+
     public static final NamedEnchantment COLD_PROOF = NamedEnchantment.wearable("cold_proof", Rarity.RARE);
 
     public static final NamedEnchantment HEAT_PROOF = NamedEnchantment.wearable("heat_proof", Rarity.RARE);
 
-    public static final NamedEnchantment ICEBREAKER = NamedEnchantment.wearable("icebvreaker", Rarity.RARE);
+    public static final NamedEnchantment ICEBREAKER = NamedEnchantment.wearable("icebreaker", Rarity.RARE);
 
     public static final NamedEnchantment FLAMEBREAKER = NamedEnchantment.wearable("flamebreaker",
             Rarity.RARE);
@@ -39,12 +43,12 @@ public class EnchantmentRegisterer {
 
         public NamedEnchantment(String name, Rarity rarity, EnchantmentType type, EquipmentSlotType[] slots) {
             super(rarity, type, slots);
-            setRegistryName(MODID, name);
+            // setRegistryName(MODID, name);
             this.name = name;
         }
 
         public static NamedEnchantment wearable(String name, Rarity rarity) {
-            return new NamedEnchantment(name, rarity, EnchantmentType.WEARABLE, WEARABLE_SLOTS);
+            return new NamedEnchantment(name, rarity, WEARABLE, WEARABLE_SLOTS);
         }
 
         @Override

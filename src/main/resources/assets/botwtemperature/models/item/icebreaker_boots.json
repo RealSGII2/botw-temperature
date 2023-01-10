@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "botwtemperature:item/snowquil_tunic"
+        "layer0": "botwtemperature:item/icebreaker_boots"
     }
 }

@@ -3,8 +3,8 @@ package dev.realsgii2.botwtemperature.registry.armormaterial;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 
-public class DesertVoeMaterial extends BaseArmorMaterial {
-    private static final String NAME = "desert_voe";
+public class IcebreakerMaterial extends BaseArmorMaterial {
+    private static final String NAME = "icebreaker";
 
     private static final int[] DURABILITY = new int[] { 1, 2, 3, 2 };
     private static final int DURABILITY_FACTOR = 10;
@@ -21,10 +21,10 @@ public class DesertVoeMaterial extends BaseArmorMaterial {
 
     private static final float KNOCKBACK_RESISTANCE = 0;
 
-    public DesertVoeMaterial() {
+    public IcebreakerMaterial() {
         super(NAME, DURABILITY, DURABILITY_FACTOR, DEFENSE, ENCHANTABILITY, EQUIP_SOUND, REPAIR_MATERIAL, TOUGHNESS,
                 KNOCKBACK_RESISTANCE);
     }
 
-    public static final DesertVoeMaterial INSTANCE = new DesertVoeMaterial();
+    public static final IcebreakerMaterial INSTANCE = new IcebreakerMaterial();
 }

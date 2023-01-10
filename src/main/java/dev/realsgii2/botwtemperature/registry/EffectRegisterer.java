@@ -10,7 +10,7 @@ public class EffectRegisterer {
     public static final NamedEffect COLD_RESISTANCE = new NamedEffect("cold_resistance", EffectType.BENEFICIAL,
             8900077);
 
-    public static final NamedEffect HEAT_RESISTANCE = new NamedEffect("cold_resistance", EffectType.BENEFICIAL,
+    public static final NamedEffect HEAT_RESISTANCE = new NamedEffect("heat_resistance", EffectType.BENEFICIAL,
             14258530);
 
     public static final NamedEffect ICEBREAKER = new NamedEffect("icebreaker", EffectType.BENEFICIAL, 4965370);

@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "botwtemperature:item/snowquil_leggings"
+        "layer0": "botwtemperature:item/flamebreaker_helm"
     }
 }

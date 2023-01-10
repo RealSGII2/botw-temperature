@@ -9,6 +9,7 @@ import static dev.realsgii2.botwtemperature.TemperatureMod.MODID;
 public class CreativeTab extends ItemGroup {
     public CreativeTab() {
         super(MODID);
+        this.setEnchantmentCategories(EnchantmentRegisterer.WEARABLE);
     }
 
     @Override
