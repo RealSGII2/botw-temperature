@@ -10,8 +10,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 
-import static dev.realsgii2.botwtemperature.BotWTemperature.MODID;
-import static dev.realsgii2.botwtemperature.BotWTemperature.LOGGER;
+import static dev.realsgii2.botwtemperature.TemperatureMod.MODID;
+import static dev.realsgii2.botwtemperature.TemperatureMod.LOGGER;
 
 @Mod.EventBusSubscriber(modid = MODID)
 public class CapabilityAttacher {

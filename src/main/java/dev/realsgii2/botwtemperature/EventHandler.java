@@ -5,7 +5,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import static dev.realsgii2.botwtemperature.BotWTemperature.MODID;
+import static dev.realsgii2.botwtemperature.TemperatureMod.MODID;
 
 import dev.realsgii2.botwtemperature.capabilities.Capabilities;
 import dev.realsgii2.botwtemperature.util.DamageSources;

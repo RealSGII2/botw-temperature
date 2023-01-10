@@ -12,7 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-import static dev.realsgii2.botwtemperature.BotWTemperature.MODID;
+import static dev.realsgii2.botwtemperature.TemperatureMod.MODID;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import dev.realsgii2.botwtemperature.capabilities.TemperatureCapability;
 
-import static dev.realsgii2.botwtemperature.BotWTemperature.LOGGER;
+import static dev.realsgii2.botwtemperature.TemperatureMod.LOGGER;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Bus.FORGE, value = { Dist.CLIENT })
 public class TemperatureGaugeRenderer {

@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-import static dev.realsgii2.botwtemperature.BotWTemperature.MODID;
+import static dev.realsgii2.botwtemperature.TemperatureMod.MODID;
 
 import javax.annotation.Nullable;
 import javax.naming.OperationNotSupportedException;

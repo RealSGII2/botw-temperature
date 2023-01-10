@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-import static dev.realsgii2.botwtemperature.BotWTemperature.LOGGER;
+import static dev.realsgii2.botwtemperature.TemperatureMod.LOGGER;
 
 public final class ClientNetwork {
     public static void handleIncomingSyncTemperatureCapabilityNetworkMessageClient(

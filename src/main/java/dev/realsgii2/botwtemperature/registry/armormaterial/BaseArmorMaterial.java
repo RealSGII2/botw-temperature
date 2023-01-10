@@ -1,11 +1,11 @@
-package dev.realsgii2.botwtemperature.item.armor;
+package dev.realsgii2.botwtemperature.registry.armormaterial;
 
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 
-import static dev.realsgii2.botwtemperature.BotWTemperature.MODID;
+import static dev.realsgii2.botwtemperature.TemperatureMod.MODID;
 
 public abstract class BaseArmorMaterial implements IArmorMaterial {
     private String name;

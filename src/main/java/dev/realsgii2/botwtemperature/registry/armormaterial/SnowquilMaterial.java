@@ -1,6 +1,5 @@
-package dev.realsgii2.botwtemperature.item.armor.SnowquilSet;
+package dev.realsgii2.botwtemperature.registry.armormaterial;
 
-import dev.realsgii2.botwtemperature.item.armor.BaseArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 

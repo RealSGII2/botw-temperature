@@ -33,7 +33,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import static dev.realsgii2.botwtemperature.BotWTemperature.LOGGER;
+import static dev.realsgii2.botwtemperature.TemperatureMod.LOGGER;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,7 +8,7 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
-import static dev.realsgii2.botwtemperature.BotWTemperature.MODID;
+import static dev.realsgii2.botwtemperature.TemperatureMod.MODID;
 
 import java.util.Optional;
 import java.util.function.Supplier;
