@@ -1,10 +1,8 @@
 package dev.realsgii2.botwtemperature;
 
-import org.apache.logging.log4j.Logger;
-
-import dev.realsgii2.botwtemperature.network.ServerNetwork;
 import dev.realsgii2.botwtemperature.registry.Registerer;
 
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -24,8 +22,6 @@ public class TemperatureMod {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
         Config.init();
-        ServerNetwork.init();
-
         Registerer.register(bus);
     }
 }

@@ -3,7 +3,6 @@ package dev.realsgii2.botwtemperature.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,9 +24,7 @@ import com.ibm.icu.impl.Pair;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import dev.realsgii2.botwtemperature.capabilities.TemperatureCapability;
-
-import static dev.realsgii2.botwtemperature.TemperatureMod.LOGGER;
+import dev.realsgii2.botwtemperature.common.Temperature;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Bus.FORGE, value = { Dist.CLIENT })
 public class TemperatureGaugeRenderer {
@@ -45,13 +42,14 @@ public class TemperatureGaugeRenderer {
     }
 
     @SubscribeEvent
+    @SuppressWarnings({"resource", "deprecation"})
     public static void afterGameOverlayRender(RenderGameOverlayEvent.Post event) {
         ClientPlayerEntity player = Minecraft.getInstance().player;
 
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL || player.isDeadOrDying())
             return;
 
-        TemperatureCapability temperature = TemperatureCapability.of(player);
+        Temperature temperature = new Temperature(player);
         double currentTemperature = temperature.getCurrentTemperature();
 
         ResourceLocation gaugeImage = GaugeImage

@@ -1,4 +1,4 @@
-package dev.realsgii2.botwtemperature.util;
+package dev.realsgii2.botwtemperature.common;
 
 import net.minecraft.util.DamageSource;
 

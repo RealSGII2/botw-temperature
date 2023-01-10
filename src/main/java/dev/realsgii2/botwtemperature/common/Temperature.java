@@ -1,37 +1,24 @@
-package dev.realsgii2.botwtemperature.capabilities;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+package dev.realsgii2.botwtemperature.common;
 
 import org.apache.commons.lang3.tuple.Triple;
 
 import com.ibm.icu.impl.Pair;
 
 import dev.realsgii2.botwtemperature.Config;
-import dev.realsgii2.botwtemperature.effects.Effects;
-import dev.realsgii2.botwtemperature.enchantments.Enchantments;
-import dev.realsgii2.botwtemperature.item.Items;
+import dev.realsgii2.botwtemperature.registry.ArmorRegisterer;
+import dev.realsgii2.botwtemperature.registry.EffectRegisterer;
+import dev.realsgii2.botwtemperature.registry.EnchantmentRegisterer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tags.Tag;
-import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkStatus;
-import net.minecraft.world.chunk.IChunk;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import static dev.realsgii2.botwtemperature.TemperatureMod.LOGGER;
 
@@ -39,51 +26,70 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TemperatureCapability implements ICapabilityProvider, ITemperatureCapability {
-    protected Biome currentBiome;
-    protected Pair<String, Double> biomePair;
-    protected int coldProtectionLevel = 0;
-    protected int heatProtectionLevel = 0;
-    protected int flameBreakerLevel = 0;
-    protected PlayerEntity player;
+public class Temperature {
+    private PlayerEntity player;
 
-    protected ArrayList<ArmorItem> coldProofArmors = new ArrayList<ArmorItem>() {
+    private ArrayList<ArmorItem> coldProofArmors = new ArrayList<ArmorItem>() {
         {
-            add(Items.SNOWQUIL_CAP.get());
-            add(Items.SNOWQUIL_TUNIC.get());
-            add(Items.SNOWQUIL_LEGGINGS.get());
-            add(Items.SNOWQUIL_BOOTS.get());
+            add(ArmorRegisterer.SNOWQUILL_HEADRESS);
+            add(ArmorRegisterer.SNOWQUILL_TUNIC);
+            add(ArmorRegisterer.SNOWQUILL_TROUSERS);
+            add(ArmorRegisterer.SNOWQUILL_BOOTS);
         }
     };
 
-    public TemperatureCapability(PlayerEntity player) {
+    public Temperature(PlayerEntity player) {
         this.player = player;
     }
 
+    /**
+     * @return Should the player receive cold damage?
+     */
     public boolean shouldDamagePlayerCold() {
         double currentTemperature = getCurrentTemperature();
         return (currentTemperature != -3 && currentTemperature < -1
                 && Math.abs(currentTemperature) - 1 > getColdProtectionLevel());
     }
 
+    /**
+     * Do not use as a condition whether to render fire. Use
+     * {@link #shouldShowFireIndicator()} instead.
+     * 
+     * @return Should the player receive heat damage?
+     */
     public boolean shouldDamagePlayerHeat() {
         double currentTemperature = getCurrentTemperature();
         return (currentTemperature != 3 && currentTemperature > 1 && currentTemperature - 1 > getHeatProtectionLevel());
     }
 
+    /**
+     * @return Should the player be set on fire due to extreme heat?
+     */
     public boolean shouldSetPlayerOnFire() {
         return (getCurrentTemperature() == 3 && !getHasFlameBreaker());
     }
 
+    /**
+     * @return Should the player receive freezing damage?
+     */
     public boolean shouldFreezePlayer() {
         return (getCurrentTemperature() == -3 && !getHasIcebreaker());
     }
 
-    public boolean shouldShowFireIndicator()
-    {
+    /**
+     * @return Should the fire indicator be shown?
+     */
+    public boolean shouldShowFireIndicator() {
         return (shouldSetPlayerOnFire() || player.isOnFire());
     }
 
+    /**
+     * Gets the current temperature as a number in between inclusively -2 and 2, or
+     * exactly
+     * -3 or 3.
+     * 
+     * @return The current temperature.
+     */
     public double getCurrentTemperature() {
         if (player.level.dimension() == World.NETHER)
             return 3;
@@ -101,17 +107,15 @@ public class TemperatureCapability implements ICapabilityProvider, ITemperatureC
         if (closestBiomePair != null) {
             double closestBiomeTemperature = getTemperatureOfBiome(closestBiomePair.first);
             Double blendAmount = 0.5 + 0.5 * (closestBiomePair.second / 32);
-            temperature = blend(closestBiomeTemperature, temperature, blendAmount, 0, 1);
+            temperature = Utils.blend(closestBiomeTemperature, temperature, blendAmount, 0, 1);
         }
 
-        for (BlockPos blockPos : getNearbyPositions(player.blockPosition(), 16, 1)) {
+        for (BlockPos blockPos : Utils.getNearbyPositions(player.blockPosition(), 16, 1)) {
             BlockState state = player.level.getBlockState(blockPos);
             Double magnitude = Math.abs(player.blockPosition().distSqr(blockPos));
 
-            if (
-                state.is(Blocks.CAMPFIRE) ||
-                state.is(Blocks.FIRE)
-            )
+            if (state.is(Blocks.CAMPFIRE) ||
+                    state.is(Blocks.FIRE))
                 temperature += (1 - magnitude / 16) * 2;
         }
 
@@ -127,26 +131,10 @@ public class TemperatureCapability implements ICapabilityProvider, ITemperatureC
         return temperature;
     }
 
-    // Credit:
-    // https://github.com/Momo-Studios/Cold-Sweat/blob/1.16.5-FG/src/main/java/dev/momostudios/coldsweat/util/world/WorldHelper.java#L81
-    private static List<BlockPos> getNearbyPositions(BlockPos pos, int samples, int interval) {
-        List<BlockPos> posList = new ArrayList<>();
-        int sampleRoot = (int) Math.sqrt(samples);
-
-        for (int sx = 0; sx < sampleRoot; sx++) {
-            for (int sz = 0; sz < sampleRoot; sz++) {
-                int length = interval * sampleRoot;
-                posList.add(pos.offset(sx * interval - (length / 2), 0, sz * interval - (length / 2)));
-            }
-        }
-
-        return posList;
-    }
-
     private Pair<Biome, Double> getClosestDifferentBiomePair(Biome excludeBiome) {
         Pair<Biome, Double> biomePair = null;
 
-        for (BlockPos blockPos : getNearbyPositions(player.blockPosition(), 64, 2)) {
+        for (BlockPos blockPos : Utils.getNearbyPositions(player.blockPosition(), 64, 2)) {
             // IChunk chunk = player.level.getChunk(blockPos.getX() >> 4, blockPos.getZ() >>
             // 4, ChunkStatus.BIOMES, false);
             // if (chunk == null)
@@ -182,35 +170,30 @@ public class TemperatureCapability implements ICapabilityProvider, ITemperatureC
 
         if (currentModifier != null) {
             temperature += currentModifier.getMiddle();
-            temperature += blend(currentModifier.getRight(), currentModifier.getMiddle(),
+            temperature += Utils.blend(currentModifier.getRight(), currentModifier.getMiddle(),
                     time, -1, 1);
         }
 
         return temperature;
     }
 
-    public Biome getCurrentBiome() {
-        return currentBiome;
-    }
-
-    public Pair<String, Double> getClosestBiomeAndDistance() {
-        return biomePair;
-    }
-
+    /**
+     * @return The player's cold protection level. Integer between 0-2.
+     */
     public int getColdProtectionLevel() {
         int level = 0;
 
         for (ItemStack a : player.inventory.armor) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(a);
 
-            if (enchantments.get(Enchantments.COLD_PROOF_ENCHANTMENT) != null)
+            if (enchantments.get(EnchantmentRegisterer.COLD_PROOF) != null)
                 level += 1;
             else if (coldProofArmors.contains(a.getItem()))
                 level += 1;
         }
 
-        if (player.hasEffect(Effects.COLD_RESISTANCE_EFFECT.get()))
-            level += player.getEffect(Effects.COLD_RESISTANCE_EFFECT.get()).getAmplifier() + 1;
+        if (player.hasEffect(EffectRegisterer.COLD_RESISTANCE))
+            level += player.getEffect(EffectRegisterer.COLD_RESISTANCE).getAmplifier() + 1;
 
         if (level > 2)
             level = 2;
@@ -220,18 +203,21 @@ public class TemperatureCapability implements ICapabilityProvider, ITemperatureC
         // return coldProtectionLevel;
     }
 
+    /**
+     * @return The player's heat protection level. Integer between 0-2.
+     */
     public int getHeatProtectionLevel() {
         int level = 0;
 
         for (ItemStack a : player.inventory.armor) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(a);
 
-            if (enchantments.get(Enchantments.HEAT_PROOF_ENCHANTMENT) != null)
+            if (enchantments.get(EnchantmentRegisterer.HEAT_PROOF) != null)
                 level += 1;
         }
 
-        if (player.hasEffect(Effects.HEAT_RESISTANCE_EFFECT.get()))
-            level += player.getEffect(Effects.HEAT_RESISTANCE_EFFECT.get()).getAmplifier() + 1;
+        if (player.hasEffect(EffectRegisterer.HEAT_RESISTANCE))
+            level += player.getEffect(EffectRegisterer.HEAT_RESISTANCE).getAmplifier() + 1;
 
         if (level > 2)
             level = 2;
@@ -241,13 +227,16 @@ public class TemperatureCapability implements ICapabilityProvider, ITemperatureC
         // return heatProtectionLevel;
     }
 
+    /**
+     * @return Whether the player is immune to fire.
+     */
     public boolean getHasFlameBreaker() {
         int level = 0;
 
         for (ItemStack a : player.inventory.armor) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(a);
 
-            if (enchantments.get(Enchantments.FLAMEBREAKER_ENCHANTMENT) != null)
+            if (enchantments.get(EnchantmentRegisterer.FLAMEBREAKER) != null)
                 level += 1;
         }
 
@@ -255,72 +244,52 @@ public class TemperatureCapability implements ICapabilityProvider, ITemperatureC
             level += 2;
 
         return level >= 2;
-
-        // return flameBreakerLevel >= 2;
     }
 
+    /**
+     * @return Whether the player is immune to freezing damage.
+     */
     public boolean getHasIcebreaker() {
         int level = 0;
 
         for (ItemStack a : player.inventory.armor) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(a);
 
-            if (enchantments.get(Enchantments.ICEBREAKER_ENCHANTMENT) != null)
+            if (enchantments.get(EnchantmentRegisterer.ICEBREAKER) != null)
                 level += 1;
         }
 
-        if (player.hasEffect(Effects.ICEBREAKER_EFFECT.get()))
+        if (player.hasEffect(EffectRegisterer.ICEBREAKER))
             level += 2;
 
         LOGGER.info(level >= 2);
 
         return level >= 2;
-
-        // return flameBreakerLevel >= 2;
     }
 
-    public void updatePropertiesBasedOnPlayer() {
-        LOGGER.error(
-                "updatePropertiesBasedOnPlayer called on something other than the server. It is a server only method.");
-    }
+    private static class Utils {
+        // Credit:
+        // https://github.com/Momo-Studios/Cold-Sweat/blob/1.16.5-FG/src/main/java/dev/momostudios/coldsweat/util/world/WorldHelper.java#L81
+        public static List<BlockPos> getNearbyPositions(BlockPos pos, int samples, int interval) {
+            List<BlockPos> posList = new ArrayList<>();
+            int sampleRoot = (int) Math.sqrt(samples);
 
-    public void setCurrentBiome(Biome biome) {
-        currentBiome = biome;
-    }
+            for (int sx = 0; sx < sampleRoot; sx++) {
+                for (int sz = 0; sz < sampleRoot; sz++) {
+                    int length = interval * sampleRoot;
+                    posList.add(pos.offset(sx * interval - (length / 2), 0, sz * interval - (length / 2)));
+                }
+            }
 
-    public void setClosestBiomeAndDistance(@Nullable Pair<String, Double> biomePair) {
-        this.biomePair = biomePair;
-    }
+            return posList;
+        }
 
-    public void setColdResistance(int protectionLevel) {
-        coldProtectionLevel = protectionLevel;
-    }
-
-    public void setHeatResistance(int protectionLevel) {
-        heatProtectionLevel = protectionLevel;
-    }
-
-    // public void setHasFlameBreaker(boolean hasFlameBreaker) {
-    // this.hasFlameBreaker = hasFlameBreaker;
-    // }
-
-    private final LazyOptional<TemperatureCapability> self = LazyOptional.of(() -> this);
-
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction side) {
-        return capability == Capabilities.temperatureCapability ? self.cast() : LazyOptional.empty();
-    }
-
-    public static TemperatureCapability of(ICapabilityProvider capabilityProvider) {
-        return capabilityProvider.getCapability(Capabilities.temperatureCapability).orElse(null);
-    }
-
-    private static double blend(double blendFrom, double blendTo, double factor, double rangeMin, double rangeMax) {
-        if (factor <= rangeMin)
-            return blendFrom;
-        if (factor >= rangeMax)
-            return blendTo;
-        return ((1 / (rangeMax - rangeMin)) * (factor - rangeMin)) * (blendTo - blendFrom) + blendFrom;
+        public static double blend(double blendFrom, double blendTo, double factor, double rangeMin, double rangeMax) {
+            if (factor <= rangeMin)
+                return blendFrom;
+            if (factor >= rangeMax)
+                return blendTo;
+            return ((1 / (rangeMax - rangeMin)) * (factor - rangeMin)) * (blendTo - blendFrom) + blendFrom;
+        }
     }
 }

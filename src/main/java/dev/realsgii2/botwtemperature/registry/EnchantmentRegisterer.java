@@ -10,20 +10,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 
 public class EnchantmentRegisterer {
-    public static final NamedEnchantment COLD_PROOF_ENCHANTMENT = NamedEnchantment.wearable("cold_proof", Rarity.RARE);
+    public static final NamedEnchantment COLD_PROOF = NamedEnchantment.wearable("cold_proof", Rarity.RARE);
 
-    public static final NamedEnchantment HEAT_PROOF_ENCHANTMENT = NamedEnchantment.wearable("heat_proof", Rarity.RARE);
+    public static final NamedEnchantment HEAT_PROOF = NamedEnchantment.wearable("heat_proof", Rarity.RARE);
 
-    public static final NamedEnchantment ICEBREAKER_ENCHANTMENT = NamedEnchantment.wearable("icebvreaker", Rarity.RARE);
+    public static final NamedEnchantment ICEBREAKER = NamedEnchantment.wearable("icebvreaker", Rarity.RARE);
 
-    public static final NamedEnchantment FLAMEBREAKER_ENCHANTMENT = NamedEnchantment.wearable("flamebreaker",
+    public static final NamedEnchantment FLAMEBREAKER = NamedEnchantment.wearable("flamebreaker",
             Rarity.RARE);
 
     private static NamedEnchantment[] TO_REGISTER = new NamedEnchantment[] {
-            COLD_PROOF_ENCHANTMENT,
-            HEAT_PROOF_ENCHANTMENT,
-            ICEBREAKER_ENCHANTMENT,
-            FLAMEBREAKER_ENCHANTMENT
+            COLD_PROOF,
+            HEAT_PROOF,
+            ICEBREAKER,
+            FLAMEBREAKER
     };
 
     public static void register(DeferredRegister<Enchantment> registerer) {
