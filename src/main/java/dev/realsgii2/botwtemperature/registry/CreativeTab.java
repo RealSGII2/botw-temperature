@@ -1,4 +1,4 @@
-package dev.realsgii2.botwtemperature;
+package dev.realsgii2.botwtemperature.registry;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
