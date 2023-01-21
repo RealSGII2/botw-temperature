@@ -97,9 +97,11 @@ public class Temperature {
         Biome biome = player.level.getBiome(player.blockPosition());
         double temperature = getTemperatureOfBiome(biome);
 
-        if (player.level.getBiome(player.blockPosition()).getPrecipitation() == Biome.RainType.RAIN
-                && player.level.isRaining()) {
-            temperature += Config.temperatureChangeIfRain();
+        if (player.level.isRaining()) {
+            if (player.level.getBiome(player.blockPosition()).getPrecipitation() == Biome.RainType.RAIN)
+                temperature += Config.temperatureChangeIfRain();
+            else
+                temperature += Config.temperatureChangeIfSnow();
         }
 
         Pair<Biome, Double> closestBiomePair = getClosestDifferentBiomePair(biome);
@@ -169,7 +171,7 @@ public class Temperature {
                 .filter(m -> m.getLeft().equals(biome.getRegistryName().toString())).findFirst().orElse(null);
 
         if (currentModifier != null) {
-            temperature += currentModifier.getMiddle();
+            // temperature += currentModifier.getMiddle();
             temperature += Utils.blend(currentModifier.getRight(), currentModifier.getMiddle(),
                     time, -1, 1);
         }

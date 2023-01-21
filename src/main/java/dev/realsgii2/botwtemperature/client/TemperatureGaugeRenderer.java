@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
@@ -41,13 +40,10 @@ public class TemperatureGaugeRenderer {
     private TemperatureGaugeRenderer() {
     }
 
-    @SubscribeEvent
+    // @SubscribeEvent
     @SuppressWarnings({"resource", "deprecation"})
     public static void afterGameOverlayRender(RenderGameOverlayEvent.Post event) {
         ClientPlayerEntity player = Minecraft.getInstance().player;
-
-        if (event.getType() != RenderGameOverlayEvent.ElementType.ALL || player.isDeadOrDying())
-            return;
 
         Temperature temperature = new Temperature(player);
         double currentTemperature = temperature.getCurrentTemperature();
@@ -72,6 +68,13 @@ public class TemperatureGaugeRenderer {
 
         final Integer left = windowWidth - SIZE - 100;
         final Integer top = windowHeight - SIZE - 15;
+
+        RenderSystem.disableDepthTest();
+
+        RenderSystem.enableAlphaTest();
+        RenderSystem.enableBlend();
+        RenderSystem.defaultAlphaFunc();
+        RenderSystem.defaultBlendFunc();
 
         textureManager.bind(gaugeImage);
         blit(stack, left, top, SIZE);
@@ -179,6 +182,7 @@ public class TemperatureGaugeRenderer {
 
         RenderSystem.disableAlphaTest();
         RenderSystem.disableBlend();
+        RenderSystem.enableDepthTest();
     }
 
     private static void blit(MatrixStack stack, Integer left, Integer top, Integer size) {

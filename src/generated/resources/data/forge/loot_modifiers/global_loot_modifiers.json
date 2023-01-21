@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "entries": [
+    "botwtemperature:snowquill_armor/village/village_snowy_house",
+    "botwtemperature:ice_breaker_armor/bastion_treasure",
+    "botwtemperature:flamebreaker_armor/bastion_other",
+    "botwtemperature:ice_breaker_armor/village/village_armorer",
+    "botwtemperature:ice_breaker_armor/bastion_other",
+    "botwtemperature:flamebreaker_armor/bastion_hoglin_stable",
+    "botwtemperature:flamebreaker_armor/village/village_armorer",
+    "botwtemperature:flamebreaker_armor/bastion_bridge",
+    "botwtemperature:ice_breaker_armor/village/village_snowy_house",
+    "botwtemperature:snowquill_armor/igloo_chest",
+    "botwtemperature:snowquill_armor/village/village_taiga_house",
+    "botwtemperature:desert_voe_armor/village/village_desert_house",
+    "botwtemperature:ice_breaker_armor/bastion_bridge",
+    "botwtemperature:ice_breaker_armor/bastion_hoglin_stable",
+    "botwtemperature:desert_voe_armor/desert_pyramid",
+    "botwtemperature:flamebreaker_armor/ruined_portal",
+    "botwtemperature:ice_breaker_armor/igloo_chest",
+    "botwtemperature:flamebreaker_armor/bastion_treasure"
+  ]
+}
